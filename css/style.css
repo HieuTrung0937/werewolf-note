@@ -1,0 +1,137 @@
+/* Hiệu ứng khi người chơi bị loại */
+.is-dead {
+  opacity: 0.4;
+  filter: grayscale(0.8);
+  background-color: #1f2937 !important; /* Đổi sang màu tối hơn */
+}
+
+/* Hiệu ứng khi thẻ được ghim */
+.is-pinned {
+  border: 2px solid #f59e0b !important;
+  box-shadow: 0 0 15px rgba(245, 158, 11, 0.2);
+}
+
+/* Màu thẻ khi đang được kéo đi */
+.ghost {
+  opacity: 0.2;
+  background: #4b5563;
+}
+
+/* Tùy chỉnh thanh cuộn cho gọn */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-thumb {
+  background: #4b5563;
+  border-radius: 10px;
+}
+
+/* Hiệu ứng rung nhẹ khi ghim (tùy chọn) */
+.handle {
+  touch-action: none; /* Tối ưu cho cảm ứng điện thoại */
+}
+/* Trạng thái khi người chơi đã chết */
+.is-dead {
+  opacity: 0.4;
+  filter: grayscale(0.8);
+  background-color: #111827 !important; /* Đậm hơn màu bg-gray-800 */
+}
+
+/* Hiệu ứng khi thẻ được ghim lên đầu */
+.is-pinned {
+  border: 2px solid #f59e0b !important;
+  box-shadow: 0 0 15px rgba(245, 158, 11, 0.2);
+}
+
+/* Hiệu ứng rung nhẹ khi ở chế độ MỞ KHÓA (để biết là kéo được) */
+.unlock-mode .player-card {
+  animation: wiggle 0.4s infinite;
+}
+
+@keyframes wiggle {
+  0% {
+    transform: rotate(0.3deg);
+  }
+  50% {
+    transform: rotate(-0.3deg);
+  }
+  100% {
+    transform: rotate(0.3deg);
+  }
+}
+
+/* Khi KHÓA, ẩn tay cầm kéo đi cho đỡ vướng */
+.lock-mode .handle {
+  display: none;
+}
+
+/* Placeholder khi đang kéo thẻ */
+.ghost {
+  opacity: 0.1;
+  background: #4b5563;
+}
+/* Khu vực bàn chơi */
+#board {
+  position: relative;
+  width: 100%;
+  height: 70vh; /* Chiều cao khu vực đặt thẻ */
+  background-color: #111827;
+  background-image: radial-gradient(#1f2937 1px, transparent 1px);
+  background-size: 20px 20px; /* Tạo lưới cho dễ nhìn */
+  overflow: hidden;
+  border: 2px dashed #374151;
+  border-radius: 1rem;
+}
+
+.player-card {
+  position: absolute; /* Quan trọng để di chuyển tự do */
+  width: 160px; /* Độ rộng cố định cho thẻ */
+  cursor: grab;
+  touch-action: none; /* Ngăn trình duyệt cuộn trang khi đang kéo thẻ */
+  user-select: none;
+  z-index: 10;
+}
+
+.player-card:active {
+  cursor: grabbing;
+  z-index: 50;
+}
+
+.is-dead {
+  opacity: 0.5;
+  filter: grayscale(1);
+}
+.is-pinned {
+  border: 2px solid #f59e0b !important;
+  z-index: 20;
+}
+
+/* Khi bị khóa thì không cho kéo */
+.lock-mode .player-card {
+  cursor: default;
+}
+:root {
+  --card-scale: 1; /* Giá trị mặc định */
+}
+
+#board {
+  position: relative;
+  /* Tăng diện tích board để có chỗ phóng to */
+  width: 200%;
+  height: 200%;
+  background-image: radial-gradient(#1f2937 1px, transparent 1px);
+  background-size: calc(30px * var(--card-scale)) calc(30px * var(--card-scale));
+}
+
+.player-card {
+  position: absolute;
+  /* Dùng transform để phóng to/thu nhỏ từ tâm */
+  transform: scale(var(--card-scale));
+  transform-origin: top left;
+  width: 140px;
+  touch-action: none;
+  user-select: none;
+  z-index: 10;
+  cursor: grab;
+}
+/* Giữ nguyên các phần CSS khác bạn đã có */
